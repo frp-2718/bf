@@ -1,0 +1,64 @@
+.\"
+.\" Author : frp
+.\" License CC0 (see http://wiki.creativecommons.org/CC0)
+.\"
+.TH BF 1 "September 17, 2013" "version 1.1"
+.SH NAME
+.B bf 
+\- brainfuck interpreter
+.SH SYNOPSIS
+.B bf
+[
+.B \-hv
+]
+.IR file
+.SH DESCRIPTION
+.B bf
+interprets the brainfuck code given in
+.I file
+.PP
+.B bf
+supports the standard brainfuck instructions (
+.B + - < > . , [ ]
+), two symbols for debug purpose ( 
+.B # %
+) and an input instruction (
+.B !
+). Any other character is considered as a comment.
+.PP
+.B #
+displays the first 100 cells of the memory buffer on the standard output,
+in a decimal + ASCII format.
+.PP
+.B %
+prints the value of the pointer, i.e. the number of the current cell.
+.PP
+.B !
+is the input operator.
+.B bf
+doesn't interpret anything after this mark, but stores the
+subsequent characters in a string to replace direct input. If the string is too
+short to fill inputs required by the brainfuck program, an error occurs.
+.PP
+The memory buffer has a size of 300.000 cells and is circular. The default size
+for a cell is 16 bits. 
+.PP
+If
+.B EOF
+is encountered during input stage, current cell value is set to 0.
+.SH OPTIONS
+.TP
+.B \-\^h
+Displays a short help message.
+.TP
+.B \-\^v
+Prints some informations about version and license of the
+.B bf
+program.
+.SH BUGS
+The number of repetitions of a brainfuck operator is limited by the size of an
+unsigned integer. This is never checked by the program. If the brainfuck code
+contains a sequence which exceeds this limit, the behaviour of the interpreted
+program will become undefined.
+.SH AUTHOR
+frp <_frp@outlook.com> 
